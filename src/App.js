@@ -5,12 +5,11 @@ import ToDo from './components/ToDo.js';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.counter = 3;
     this.state = {
       todos: [
-        { description: 'Walk the cat', isCompleted: true,  id: 0},
-        { description: 'Throw the dishes away', isCompleted: false, id: 1},
-        { description: 'Buy new dishes', isCompleted: false, id: 2}
+        { description: 'Walk the cat', isCompleted: true},
+        { description: 'Throw the dishes away', isCompleted: false},
+        { description: 'Buy new dishes', isCompleted: false}
       ],
       newTodoDescription: ''
     };
@@ -30,7 +29,7 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if(!this.state.newTodoDescription) { return }
-    const newTodo = { description: this.state.newTodoDescription, isCompleted: false, id: this.counter ++};
+    const newTodo = { description: this.state.newTodoDescription, isCompleted: false};
     this.setState({ todos: [...this.state.todos, newTodo], newTodoDescription: '' });
   }
 
