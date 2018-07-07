@@ -16,7 +16,7 @@ class App extends Component {
   }
 
 
-  deleteTodo() {
+  deleteTodo(id, e) {
     const todos = this.state.todos.filter(todo => todo.isCompleted !== false);
     this.setState({ todos: todos });
   }
@@ -52,7 +52,7 @@ class App extends Component {
         <form onSubmit={ (e) => this.handleSubmit(e) }>
           <input type="text" value={ this.state.newTodoDescription} onChange={ (e) => this.handleChange(e) } />
           <input type="submit" />
-          <button onClick={ deleteTodo() } >Delete</button>
+          <button onClick={ (e) => this.deleteTodo(id, e) } >Delete</button>
         </form>
 
       </div>
