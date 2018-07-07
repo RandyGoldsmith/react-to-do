@@ -5,21 +5,21 @@ import ToDo from './components/ToDo.js';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.counter = 3;
     this.state = {
       todos: [
-        { description: 'Walk the cat', isCompleted: true},
-        { description: 'Throw the dishes away', isCompleted: false},
-        { description: 'Buy new dishes', isCompleted: false}
+        { description: 'Walk the cat', isCompleted: true,  id: 0},
+        { description: 'Throw the dishes away', isCompleted: false, id: 1},
+        { description: 'Buy new dishes', isCompleted: false, id: 2}
       ],
       newTodoDescription: ''
     };
   }
 
 
-  deleteTodo(todo) {
-    console.log(todo);
-    //const todos = this.state.todos.filter(todo => todo.isCompleted !== false);
-    //this.setState({ todos: todos });
+  deleteTodo(id) {
+    const todos = this.state.todos.filter(todo => todo.id !== id);
+    this.setState({ todos: todos });
   }
 
   handleChange(e) {
@@ -30,7 +30,7 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if(!this.state.newTodoDescription) { return }
-    const newTodo = { description: this.state.newTodoDescription, isCompleted: false};
+    const newTodo = { description: this.state.newTodoDescription, isCompleted: false, id: this.counter ++};
     this.setState({ todos: [...this.state.todos, newTodo], newTodoDescription: '' });
   }
 
@@ -47,7 +47,7 @@ class App extends Component {
       <div className="App">
         <ul>
           { this.state.todos.map( (todo, index) =>
-            <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) }  deleteTodo={ () => this.deleteTodo(todo) } />
+            <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) }  deleteTodo={ () => this.deleteTodo(id) } />
           )}
         </ul>
         <form onSubmit={ (e) => this.handleSubmit(e) }>
